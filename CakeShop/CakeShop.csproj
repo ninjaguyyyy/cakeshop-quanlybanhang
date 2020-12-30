@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAO\CakesDAO.cs" />
+    <Compile Include="DAO\CategoriesDAO.cs" />
+    <Compile Include="DTO\Cake.cs" />
+    <Compile Include="DTO\CartItem.cs" />
+    <Compile Include="DTO\Category.cs" />
+    <Compile Include="DTO\Order.cs" />
+    <Compile Include="screens\AddCakeScreen.xaml.cs">
+      <DependentUpon>AddCakeScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="screens\ImagePathToAbsolutePathConverter.cs" />
     <Compile Include="screens\ListCakesScreen.xaml.cs">
       <DependentUpon>ListCakesScreen.xaml</DependentUpon>
     </Compile>
@@ -62,6 +75,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="screens\MoneyUnitConverter.cs" />
+    <Page Include="screens\AddCakeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="screens\ListCakesScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +115,13 @@
     <Resource Include="Assets\Fonts\Roboto-Regular.ttf" />
     <Resource Include="Assets\Fonts\Roboto-Thin.ttf" />
     <Resource Include="Assets\Fonts\Roboto-ThinItalic.ttf" />
+    <None Include="Data\cakes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\categories.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,6 +154,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\power-button_bl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\add_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\food.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\bg_upload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

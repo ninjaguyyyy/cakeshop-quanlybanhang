@@ -8,7 +8,8 @@
         Title="ListCakesScreen"  Height="620" Width="988"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Loaded="Window_Loaded">
     <Window.Resources>
         
         <Style x:Key="font_style" TargetType="TextBlock">
@@ -151,7 +152,35 @@
             <Style.Triggers>
             </Style.Triggers>
         </Style>
-        
+
+        <ImageBrush x:Key="add_member_mouse_over" ImageSource="../Assets/Images/add_active.png" />
+
+        <Style x:Key="add_member_btn" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        TargetName="button"
+                                        Value="{StaticResource add_member_mouse_over}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <local:ImagePathToAbsolutePathConverter x:Key="converter" />
+        <local:MoneyUnitConverter x:Key="unitConverter" />
     </Window.Resources>
     <Grid>
         <Grid x:Name="mainPanel" 
@@ -170,7 +199,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
@@ -200,16 +229,30 @@
                     <TextBlock
                                    FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
                                    Text="Danh sách"
+                        VerticalAlignment="Center"
                                    FontSize="18"
                                    Margin="0, 0, 10, 0"
                                    />
                     <TextBlock 
                                    FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
                                    Text="Chuyến đi"
+                        VerticalAlignment="Center"
                                 Foreground="#948E84"
                                    FontSize="18"
                                    Margin="0, 0, 0, 0"
                                    />
+                    <Button VerticalAlignment="Top" 
+                            Width="30"
+                            Margin="20, 0, 0, 0"
+                            Height="30"
+                            Name="addCakeButton"
+                            Click="addCakeButton_Click"
+                            BorderThickness="0"
+                            Style="{StaticResource add_member_btn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="../Assets/Images/add.png" />
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
                 
                 <ComboBox Name="modeSearchComboBox"
@@ -240,7 +283,7 @@
                     
 
                     <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  Name="tripsListView"
+                                  Name="cakesListView"
                                   Grid.Row="0"
                                   BorderThickness="0">
                         <ListView.ItemsPanel>
@@ -252,18 +295,24 @@
                             <DataTemplate>
                                 <StackPanel Margin="5, 8, 10, 5"
                                                 Tag="{Binding Id}"
-                                                Name="tripListViewItem"
+                                                Name="cakeListViewItem"
                                                 >
                                     <Border Width="150" 
                                                 Height="90" 
                                                 CornerRadius="8">
-                                       
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image_Main, Converter={StaticResource converter}}" />
+                                        </Border.Background>
                                     </Border>
 
-                                    <StackPanel Margin="0, 8, 0, 0">
+                                    <DockPanel Margin="0, 8, 0, 0">
                                         <TextBlock Text="{Binding Name}"
                                                        FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
-                                    </StackPanel>
+                                        <TextBlock Text="{Binding Price, Converter={StaticResource unitConverter}}"
+                                                   DockPanel.Dock="Right"
+                                                   HorizontalAlignment="Right"
+                                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
+                                    </DockPanel>
                                 </StackPanel>
 
                             </DataTemplate>

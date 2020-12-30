@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CakeShop.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,28 @@ namespace CakeShop.screens
         private void modeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void addCakeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var AddCakeScreen = new AddCakeScreen();
+            if (AddCakeScreen.ShowDialog() == true)
+            {
+                var newCake = AddCakeScreen.NewCake;
+                // handle with new cake
+                CakesDAO.InsertCake(newCake);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayProducts();
+        }
+
+        void DisplayProducts()
+        {
+            var fetchedCakes = CakesDAO.GetCake();
+            cakesListView.ItemsSource = fetchedCakes;
         }
     }
 }
