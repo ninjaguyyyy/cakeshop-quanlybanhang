@@ -145,5 +145,30 @@ namespace CakeShop.DAO
 
             return null;
         }
+
+        public static bool RemoveCake(string idCake)
+        {
+            var result = true;
+
+            string jsonFilePath = "./Data/cakes.json";
+            var json = File.ReadAllText(jsonFilePath);
+
+            try
+            {
+                JArray cakes = JArray.Parse(json);
+                var cakeToDelete = cakes.FirstOrDefault(obj => obj["Id"].Value<String>() == idCake);
+                cakes.Remove(cakeToDelete);
+
+                string newJsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(cakes,
+                               Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(jsonFilePath, newJsonResult);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
     }
 }

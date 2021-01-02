@@ -252,7 +252,8 @@ namespace CakeShop.screens
             var that = sender as StackPanel;
             var id = that.Tag;
             var detailTripScreen = new DetailCakeScreen(id.ToString());
-            detailTripScreen.Show();
+            detailTripScreen.ShowDialog();
+            DisplayProducts();
         }
     }
 }
