@@ -38,6 +38,26 @@ namespace CakeShop.DAO
             return result;
         }
 
+        public static int CountCakes()
+        {
+            var result = 0;
+
+            string jsonFilePath = "./Data/cakes.json";
+            var json = File.ReadAllText(jsonFilePath);
+
+            try
+            {
+                JArray cakes = JArray.Parse(json);
+                result = cakes.Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
         public static List<Cake> GetCake()
         {
             var result = new List<Cake>();
@@ -81,6 +101,49 @@ namespace CakeShop.DAO
 
 
             return result;
+        }
+
+        public static Cake GetById(string id)
+        {
+            string jsonFilePath = "./Data/cakes.json";
+            var json = File.ReadAllText(jsonFilePath);
+
+            try
+            {
+                JArray cakes = JArray.Parse(json);
+
+                foreach (var cake in cakes)
+                {
+                    if (cake["Id"].ToString() == id)
+                    {
+                        Cake cakeObject = new Cake();
+                        cakeObject.Id = cake["Id"].ToString();
+                        cakeObject.Name = cake["Name"].ToString();
+                        cakeObject.Description = cake["Description"].ToString();
+                        cakeObject.Price = int.Parse(cake["Price"].ToString());
+                        cakeObject.Image_Main = cake["Image_Main"].ToString();
+                        cakeObject.Image_Main = cake["Image_Main"].ToString();
+
+                        var categoryObj = JObject.Parse(cake["Category"].ToString());
+                        Category category = new Category()
+                        {
+                            Id = categoryObj["Id"].ToString(),
+                            Name = categoryObj["Name"].ToString()
+                        };
+                        cakeObject.Category = category;
+
+
+
+                        return cakeObject;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return null;
         }
     }
 }

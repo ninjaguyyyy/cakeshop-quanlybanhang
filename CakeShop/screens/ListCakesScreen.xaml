@@ -296,6 +296,7 @@
                                 <StackPanel Margin="5, 8, 10, 5"
                                                 Tag="{Binding Id}"
                                                 Name="cakeListViewItem"
+                                            PreviewMouseLeftButtonUp="cakeListViewItem_PreviewMouseLeftButtonUp"
                                                 >
                                     <Border Width="150" 
                                                 Height="90" 

@@ -67,6 +67,9 @@
     <Compile Include="screens\AddCakeScreen.xaml.cs">
       <DependentUpon>AddCakeScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="screens\DetailCakeScreen.xaml.cs">
+      <DependentUpon>DetailCakeScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="screens\ImagePathToAbsolutePathConverter.cs" />
     <Compile Include="screens\ListCakesScreen.xaml.cs">
       <DependentUpon>ListCakesScreen.xaml</DependentUpon>
@@ -77,6 +80,10 @@
     </Compile>
     <Compile Include="screens\MoneyUnitConverter.cs" />
     <Page Include="screens\AddCakeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="screens\DetailCakeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

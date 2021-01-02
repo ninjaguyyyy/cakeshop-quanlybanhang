@@ -20,6 +20,43 @@ namespace CakeShop.screens
     /// </summary>
     public partial class ListCakesScreen : Window
     {
+        class PageInfo
+        {
+            public int Page { get; set; }
+            public int TotalPages { get; set; }
+        }
+
+        class Paging
+        {
+            private int _totalPages;
+            public int CurrentPage { get; set; }
+
+            public int RowsPerPage { get; set; }
+
+            public int TotalPages
+            {
+                get => _totalPages; set
+                {
+                    _totalPages = value;
+                    Pages = new List<PageInfo>();
+                    for (int i = 1; i <= _totalPages; i++)
+                    {
+                        Pages.Add(new PageInfo()
+                        {
+                            Page = i,
+                            TotalPages = _totalPages
+                        });
+                    }
+                }
+            }
+
+            public List<PageInfo> Pages { get; set; }
+
+        }
+
+        private Paging cakesPaging;
+        private const int ROW_PER_PAGE = 12;
+
         public ListCakesScreen()
         {
             InitializeComponent();
@@ -86,6 +123,7 @@ namespace CakeShop.screens
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            HandlePagingInfoForCakes();
             DisplayProducts();
         }
 
@@ -93,6 +131,128 @@ namespace CakeShop.screens
         {
             var fetchedCakes = CakesDAO.GetCake();
             cakesListView.ItemsSource = fetchedCakes;
+        }
+
+        void HandlePagingInfoForCakes()
+        {
+            var count = CakesDAO.CountCakes();
+
+            cakesPaging = new Paging
+            {
+                CurrentPage = 1,
+                RowsPerPage = ROW_PER_PAGE,
+                TotalPages = count / ROW_PER_PAGE +
+                    (((count % ROW_PER_PAGE) == 0) ? 0 : 1)
+            };
+
+            pagingListView.Items.Clear();
+
+            var prevListViewItem = new ListViewItem();
+            prevListViewItem.Content = "⏪  prev";
+            Thickness paddingForNext = prevListViewItem.Padding;
+            paddingForNext.Left = 20;
+            paddingForNext.Right = 13;
+            paddingForNext.Top = 8;
+            paddingForNext.Bottom = 8;
+            prevListViewItem.Padding = paddingForNext;
+            prevListViewItem.Focusable = false;
+            prevListViewItem.Foreground = Brushes.White;
+            prevListViewItem.PreviewMouseLeftButtonUp += prevLVItem_PreviewMouseLeftButtonUp;
+            pagingListView.Items.Add(prevListViewItem);
+
+            foreach (var page in cakesPaging.Pages)
+            {
+
+                var pageListViewItem = new ListViewItem();
+                pageListViewItem.Foreground = Brushes.White;
+                Thickness padding = pageListViewItem.Padding;
+                padding.Left = 13;
+                padding.Right = 13;
+                padding.Top = 8;
+                padding.Bottom = 8;
+                pageListViewItem.Padding = padding;
+
+                pageListViewItem.Content = page.Page;
+                pageListViewItem.PreviewMouseLeftButtonUp += HandlePageClicked;
+
+                if (page.Page == 1)
+                {
+                    pageListViewItem.IsSelected = true;
+                }
+
+                pagingListView.Items.Add(pageListViewItem);
+            }
+
+            var nextListViewItem = new ListViewItem();
+            nextListViewItem.Content = "next  ⏩";
+            Thickness paddingForPrev = nextListViewItem.Padding;
+            paddingForPrev.Left = 13;
+            paddingForPrev.Right = 20;
+            paddingForPrev.Top = 8;
+            paddingForPrev.Bottom = 8;
+            nextListViewItem.Padding = paddingForPrev;
+            nextListViewItem.Focusable = false;
+            nextListViewItem.Foreground = Brushes.White;
+            nextListViewItem.PreviewMouseLeftButtonUp += nextLVItem_PreviewMouseLeftButtonUp;
+            pagingListView.Items.Add(nextListViewItem);
+
+
+        }
+
+        private void nextLVItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (cakesPaging.CurrentPage < cakesPaging.TotalPages)
+            {
+                cakesPaging.CurrentPage++;
+                foreach (dynamic item in pagingListView.Items)
+                {
+                    if (item.Content.ToString() == (cakesPaging.CurrentPage - 1).ToString())
+                    {
+                        item.IsSelected = false;
+                    }
+                    if (item.Content.ToString() == cakesPaging.CurrentPage.ToString())
+                    {
+                        item.IsSelected = true;
+                    }
+                }
+            }
+            DisplayProducts();
+        }
+
+        private void HandlePageClicked(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as ListViewItem;
+            cakesPaging.CurrentPage = int.Parse(item.Content.ToString());
+
+            DisplayProducts();
+        }
+
+        private void prevLVItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (cakesPaging.CurrentPage > 1)
+            {
+                cakesPaging.CurrentPage--;
+                foreach (dynamic item in pagingListView.Items)
+                {
+                    if (item.Content.ToString() == (cakesPaging.CurrentPage + 1).ToString())
+                    {
+                        item.IsSelected = false;
+                    }
+                    if (item.Content.ToString() == cakesPaging.CurrentPage.ToString())
+                    {
+                        item.IsSelected = true;
+                    }
+                }
+            }
+            DisplayProducts();
+        }
+
+        private void cakeListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var that = sender as StackPanel;
+            var id = that.Tag;
+            var detailTripScreen = new DetailCakeScreen(id.ToString());
+            detailTripScreen.Show();
         }
     }
 }
