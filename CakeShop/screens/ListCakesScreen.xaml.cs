@@ -95,11 +95,6 @@ namespace CakeShop.screens
             }
         }
 
-        private void addTripListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -254,6 +249,14 @@ namespace CakeShop.screens
             var detailTripScreen = new DetailCakeScreen(id.ToString());
             detailTripScreen.ShowDialog();
             DisplayProducts();
+        }
+
+        private void orderListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var ordersScreen = new OrdersScreen();
+            ordersScreen.Show();
+
+            this.Close();
         }
     }
 }

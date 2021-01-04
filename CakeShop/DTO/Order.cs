@@ -9,7 +9,7 @@ namespace CakeShop.DTO
     class Order
     {
         public string Id { get; set; }
-        public string Customer { get; set; }
+        public string Name { get; set; }
         public List<CartItem> CartItems { get; set; }
         public string CreatedDate { get; set; }
         public int TotalPrice { get; set; }

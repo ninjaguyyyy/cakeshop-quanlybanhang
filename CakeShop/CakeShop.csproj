@@ -60,12 +60,16 @@
     </ApplicationDefinition>
     <Compile Include="DAO\CakesDAO.cs" />
     <Compile Include="DAO\CategoriesDAO.cs" />
+    <Compile Include="DAO\OrdersDAO.cs" />
     <Compile Include="DTO\Cake.cs" />
     <Compile Include="DTO\CartItem.cs" />
     <Compile Include="DTO\Category.cs" />
     <Compile Include="DTO\Order.cs" />
     <Compile Include="screens\AddCakeScreen.xaml.cs">
       <DependentUpon>AddCakeScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="screens\AddOrderScreen.xaml.cs">
+      <DependentUpon>AddOrderScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="screens\DetailCakeScreen.xaml.cs">
       <DependentUpon>DetailCakeScreen.xaml</DependentUpon>
@@ -79,7 +83,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="screens\MoneyUnitConverter.cs" />
+    <Compile Include="screens\OrdersScreen.xaml.cs">
+      <DependentUpon>OrdersScreen.xaml</DependentUpon>
+    </Compile>
     <Page Include="screens\AddCakeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="screens\AddOrderScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="screens\ListCakesScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="screens\OrdersScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +141,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\categories.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\orders.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -178,6 +196,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\bg_upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\add-file.png" />
+    <Resource Include="Assets\Images\add-file_active.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

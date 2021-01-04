@@ -1,191 +1,192 @@
-﻿<Window x:Class="CakeShop.screens.ListCakesScreen"
+﻿<Window x:Class="CakeShop.screens.OrdersScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CakeShop.screens"
         mc:Ignorable="d"
-        Title="ListCakesScreen" Height="620" Width="988"
+        Title="OrdersScreen" Height="620" Width="988"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         Loaded="Window_Loaded">
     <Window.Resources>
         
-        <Style x:Key="font_style" TargetType="TextBlock">
-            <Setter Property="FontFamily"
+    
+    <Style x:Key="font_style" TargetType="TextBlock">
+        <Setter Property="FontFamily"
                     Value="Fonts/Roboto-Light.ttf #Roboto"/>
-            <Setter Property="VerticalAlignment"
+        <Setter Property="VerticalAlignment"
                     Value="Center"/>
-            <Setter Property="HorizontalAlignment"
+        <Setter Property="HorizontalAlignment"
                     Value="Left"/>
-            <Setter Property="Foreground"
+        <Setter Property="Foreground"
                     Value="White"/>
-            <Setter Property="FontSize"
+        <Setter Property="FontSize"
                     Value="20"/>
 
-        </Style>
-        
-        <ImageBrush x:Key="tb_mouse_over"
+    </Style>
+
+    <ImageBrush x:Key="tb_mouse_over"
                     ImageSource="../Assets/Images/list.png"/>
-        
-        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border  x:Name="border"
+
+    <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border  x:Name="border"
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Background="{TemplateBinding Background}"
                                  SnapsToDevicePixels="True">
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background"
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
-                                <Setter Property="BorderBrush"
+                            <Setter Property="BorderBrush"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background"
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
-                                <Setter Property="BorderBrush"
+                            <Setter Property="BorderBrush"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-        <Style TargetType="ToolTip" x:Key="tt_style">
+    <Style TargetType="ToolTip" x:Key="tt_style">
 
-            <Setter Property="Placement" Value="Right"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="20,0,0,0"/>
-            <Setter Property="Background" Value="#4A5668"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
-            <Setter Property="HorizontalOffset" Value="15"/>
-            <Setter Property="VerticalOffset" Value="6"/>
-            <Setter Property="HasDropShadow" Value="True"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Placement" Value="Right"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+        <Setter Property="Background" Value="#4A5668"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+        <Setter Property="HorizontalOffset" Value="15"/>
+        <Setter Property="VerticalOffset" Value="6"/>
+        <Setter Property="HasDropShadow" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
 
-        </Style>
+    </Style>
 
-        <ImageBrush x:Key="CloseBtn_MouseOver" ImageSource="../Assets/Images/power-button_bl.png"/>
+    <ImageBrush x:Key="CloseBtn_MouseOver" ImageSource="../Assets/Images/power-button_bl.png"/>
 
-        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="button"
+    <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver"
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
                                      Value="True">
-                                <Setter Property="Background"
+                            <Setter Property="Background"
                                         TargetName="button"
                                         Value="{StaticResource CloseBtn_MouseOver}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-        <Style x:Key="ComboBoxTest2" TargetType="{x:Type ComboBox}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
-                                <ToggleButton.Template>
-                                    <ControlTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="5*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="5" Background="Beige" BorderBrush="Black" BorderThickness="1" />
-                                            <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="AliceBlue"  BorderBrush="Black" BorderThickness="0,0,1,0" />
-                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="Orange" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="LightBlue" />
-                                            </Trigger>
-                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="LightBlue" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
-                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
-                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
-                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
-                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder" Background="LightBlue" />
-                                    <ScrollViewer SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True" />
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-            </Style.Triggers>
-        </Style>
+    <Style x:Key="ComboBoxTest2" TargetType="{x:Type ComboBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                            <ToggleButton.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="5" Background="Beige" BorderBrush="Black" BorderThickness="1" />
+                                        <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="AliceBlue"  BorderBrush="Black" BorderThickness="0,0,1,0" />
+                                        <Path x:Name="Arrow" Grid.Column="1"  Fill="Orange" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                            <Setter TargetName="Border" Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                            <Setter TargetName="Border" Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+                        <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                            <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border x:Name="DropDownBorder" Background="LightBlue" />
+                                <ScrollViewer SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
 
-        <ImageBrush x:Key="add_member_mouse_over" ImageSource="../Assets/Images/add_active.png" />
+    <ImageBrush x:Key="add_member_mouse_over" ImageSource="../Assets/Images/add-file_active.png" />
 
-        <Style x:Key="add_member_btn" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="button"
+    <Style x:Key="add_member_btn" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver"
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
                                      Value="True">
-                                <Setter Property="Background"
+                            <Setter Property="Background"
                                         TargetName="button"
                                         Value="{StaticResource add_member_mouse_over}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-        <local:ImagePathToAbsolutePathConverter x:Key="converter" />
-        <local:MoneyUnitConverter x:Key="unitConverter" />
+    <local:ImagePathToAbsolutePathConverter x:Key="converter" />
+    <local:MoneyUnitConverter x:Key="unitConverter" />
     </Window.Resources>
     <Grid>
         <Grid x:Name="mainPanel" 
                   PreviewMouseLeftButtonDown="mainPanel_PreviewMouseLeftButtonDown" 
-                  Background="White">
+                  Background="#E1ECEB">
 
         </Grid>
 
@@ -235,86 +236,61 @@
                                    />
                     <TextBlock 
                                    FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
-                                   Text="Chuyến đi"
+                                   Text="Đơn hàng"
                         VerticalAlignment="Center"
                                 Foreground="#948E84"
                                    FontSize="18"
                                    Margin="0, 0, 0, 0"
                                    />
-                    <Button VerticalAlignment="Top" 
+                    <Button VerticalAlignment="Center" 
                             Width="30"
                             Margin="20, 0, 0, 0"
                             Height="30"
-                            Name="addCakeButton"
-                            Click="addCakeButton_Click"
+                            Name="addOrderButton"
+                            Click="addOrderButton_Click"
                             BorderThickness="0"
                             Style="{StaticResource add_member_btn}">
                         <Button.Background>
-                            <ImageBrush ImageSource="../Assets/Images/add.png" />
+                            <ImageBrush ImageSource="../Assets/Images/add-file.png" />
                         </Button.Background>
                     </Button>
                 </StackPanel>
-                
-                <ComboBox Name="modeSearchComboBox"
-                              Width="150"
-                          HorizontalAlignment="Right"
-                                        Style="{StaticResource ComboBoxTest2}"
-                                        Grid.Column="2"
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                              
-                                        SelectionChanged="modeSearchComboBox_SelectionChanged"
-                                        Margin="0,0,10,0"
-                                        >
-                    <ComboBoxItem IsSelected="true" Tag="name_trip" >Theo tên chuyến</ComboBoxItem>
-                    <ComboBoxItem Tag="name_member">Theo thành viên</ComboBoxItem>
 
-                </ComboBox>
+                
             </Grid>
 
             <Grid Grid.Row="3" Grid.Column="1">
-                
 
-                <Grid Grid.Column="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.5*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0, 0, 10, 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
-                    
+
 
                     <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  Name="cakesListView"
+                                  Name="ordersListView"
                                   Grid.Row="0"
+                              Background="Transparent"
                                   BorderThickness="0">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel />
+                                <StackPanel />
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="5, 8, 10, 5"
-                                                Tag="{Binding Id}"
-                                                Name="cakeListViewItem"
-                                            PreviewMouseLeftButtonUp="cakeListViewItem_PreviewMouseLeftButtonUp"
-                                                >
-                                    <Border Width="150" 
-                                                Height="90" 
-                                                CornerRadius="8">
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding Image_Main, Converter={StaticResource converter}}" />
-                                        </Border.Background>
-                                    </Border>
-
-                                    <DockPanel Margin="0, 8, 0, 0">
-                                        <TextBlock Text="{Binding Name}"
-                                                       FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
-                                        <TextBlock Text="{Binding Price, Converter={StaticResource unitConverter}}"
-                                                   DockPanel.Dock="Right"
-                                                   HorizontalAlignment="Right"
-                                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
-                                    </DockPanel>
-                                </StackPanel>
+                                <Border Background="White"
+                                        CornerRadius="10">
+                                    <Grid>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </Grid>
+                                </Border>
 
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -357,6 +333,7 @@
 
                     <DockPanel Grid.Row="2">
                         <ListView Width="auto"
+                                  Background="Transparent"
                                       Name="pagingListView"
                                       BorderThickness="0">
                             <ListView.ItemsPanel>
@@ -415,7 +392,51 @@
                     </DockPanel>
                 </Grid>
 
-                
+                <Grid Grid.Column="1"
+                      Margin="10, 0, 0, 0">
+                    <Border Background="#425C5A"
+                            BorderBrush="#425C5A"
+                            BorderThickness="1"
+                            CornerRadius="20">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Tên đơn"
+                                               FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                               Foreground="White"
+                                               FontSize="13"/>
+                                    <TextBlock Text="Tên a sàdà"
+                                               FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                               Foreground="White"
+                                               FontSize="15"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1"
+                                            HorizontalAlignment="Right">
+                                    <TextBlock Text="Ngày tạo"
+                                               FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                               Foreground="White"
+                                               FontSize="13"
+                                               TextAlignment="Right"/>
+                                    <TextBlock Text="20/02/2020"
+                                               Foreground="White"
+                                               FontSize="15"
+                                               FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                               TextAlignment="Right"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
 
         </Grid>
@@ -514,7 +535,10 @@
                         <!--// Home //-->
 
                         <ListViewItem HorizontalAlignment="Left"
-                                          Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                          Margin="0,0,0,15" 
+                                      Name="listCakeListViewItem"
+                                      PreviewMouseLeftButtonUp="listCakeListViewItem_PreviewMouseLeftButtonUp"
+                                      MouseEnter="ListViewItem_MouseEnter"
                                           >
                             <StackPanel Orientation="Horizontal"
                                             Width="230">
@@ -569,14 +593,14 @@
                             </ListViewItem.ToolTip>
 
                         </ListViewItem>
-                        
+
                         <!--// Add trip //-->
 
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15" 
-                                      Name="orderListViewItem"
+                                      Name="addTripListViewItem"
                                       MouseEnter="ListViewItem_MouseEnter"
-                                      PreviewMouseLeftButtonUp="orderListViewItem_PreviewMouseLeftButtonUp" >
+                                      >
 
                             <StackPanel Orientation="Horizontal"
                                             Width="230">
@@ -636,7 +660,7 @@
 
                         </ListViewItem>
 
-                       
+
 
                         <!--// Listview items style template //-->
 
@@ -666,7 +690,7 @@
                                                     <Setter Property="Background"
                                                                 TargetName="Bd"
                                                                 Value="#E1ECEB"/>
-                                                    
+
                                                     <Setter Property="Cursor" Value="Hand"/>
 
                                                 </MultiTrigger>
