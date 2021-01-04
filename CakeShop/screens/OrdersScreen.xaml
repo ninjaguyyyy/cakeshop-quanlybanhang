@@ -286,9 +286,53 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="White"
-                                        CornerRadius="10">
-                                    <Grid>
-                                        <TextBlock Text="{Binding Name}"/>
+                                        CornerRadius="10"
+                                        Width="520"
+                                        Height="80">
+                                    <Grid Margin="10, 10, 10, 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}"
+                                                   Grid.Column="0"
+                                                   TextWrapping="Wrap"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding CreatedDate}"/>
+                                            <TextBlock Text="So luong: 2"/>
+                                        </StackPanel>
+                                        <Grid Grid.Column="2">
+                                            <ListView ItemsSource="{Binding CartItems}"
+                                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                              BorderThickness="0">
+                                                <ListView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ListView.ItemsPanel>
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel x:Name="cartItemListViewItem"
+                                                            Uid="{Binding Id}">
+                                                            <Border Width="50" 
+                                                Height="30" 
+                                                CornerRadius="8">
+                                                                <Border.Background>
+                                                                    <ImageBrush ImageSource="{Binding Cake.Image_Main, Converter={StaticResource converter}}" />
+                                                                </Border.Background>
+                                                            </Border>
+                                                            
+                                                        </StackPanel>
+
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </Grid>
+                                        <Border Grid.Column="3">
+                                            <TextBlock Text="{Binding TotalPrice}"/>
+                                        </Border>
                                     </Grid>
                                 </Border>
 

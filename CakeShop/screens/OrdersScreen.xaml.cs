@@ -90,6 +90,7 @@ namespace CakeShop.screens
         {
             var fetchedOrders = OrdersDAO.GetOrders();
             ordersListView.ItemsSource = fetchedOrders;
+            
         }
     }
 }
