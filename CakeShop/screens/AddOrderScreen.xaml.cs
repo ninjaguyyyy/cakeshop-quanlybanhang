@@ -75,7 +75,7 @@ namespace CakeShop.screens
 
         void DisplayProducts()
         {
-            var fetchedCakes = CakesDAO.GetCake();
+            var fetchedCakes = CakesDAO.GetCake(100, 1, "0");
             cakesListView.ItemsSource = fetchedCakes;
 
             var nameGenerated = Guid.NewGuid().ToString();

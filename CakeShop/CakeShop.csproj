@@ -86,6 +86,9 @@
     <Compile Include="screens\OrdersScreen.xaml.cs">
       <DependentUpon>OrdersScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="screens\ReportsScreen.xaml.cs">
+      <DependentUpon>ReportsScreen.xaml</DependentUpon>
+    </Compile>
     <Page Include="screens\AddCakeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="screens\OrdersScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="screens\ReportsScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

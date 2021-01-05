@@ -58,7 +58,7 @@ namespace CakeShop.DAO
             return result;
         }
 
-        public static List<Cake> GetCake()
+        public static List<Cake> GetCake(int perPage, int pageCurrent, string categoryFilter)
         {
             var result = new List<Cake>();
 
@@ -69,8 +69,8 @@ namespace CakeShop.DAO
             {
                 JArray cakes = JArray.Parse(json);
 
-                //int skipValue = pageCurrent == 1 ? 0 : (pageCurrent - 1) * perPage;
-                //trips = new JArray(trips.Skip(skipValue).Take(perPage));
+                int skipValue = pageCurrent == 1 ? 0 : (pageCurrent - 1) * perPage;
+                cakes = new JArray(cakes.Skip(skipValue).Take(perPage));
 
                 foreach (var cake in cakes)
                 {
@@ -89,7 +89,20 @@ namespace CakeShop.DAO
                     };
                     cakeObject.Category = category;
 
-                    result.Add(cakeObject);
+                     
+                    
+                    if(categoryFilter == "0")
+                    {
+                        result.Add(cakeObject);
+                    }
+                    else
+                    {
+                        if(categoryFilter == cakeObject.Category.Id)
+                        {
+                            result.Add(cakeObject);
+                        }
+                    }
+                    
                 }
             }
             catch (Exception)

@@ -23,5 +23,40 @@ namespace CakeShop.screens
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void mainPanel_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void listCakeListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

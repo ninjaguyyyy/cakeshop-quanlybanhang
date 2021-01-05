@@ -20,6 +20,7 @@ namespace CakeShop.screens
     /// </summary>
     public partial class ListCakesScreen : Window
     {
+        private string categoryFilter;
         class PageInfo
         {
             public int Page { get; set; }
@@ -100,11 +101,7 @@ namespace CakeShop.screens
             Application.Current.Shutdown();
         }
 
-        private void modeSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        
         private void addCakeButton_Click(object sender, RoutedEventArgs e)
         {
             var AddCakeScreen = new AddCakeScreen();
@@ -113,18 +110,25 @@ namespace CakeShop.screens
                 var newCake = AddCakeScreen.NewCake;
                 // handle with new cake
                 CakesDAO.InsertCake(newCake);
+                DisplayProducts();
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var categories = CategoriesDAO.GetCategories();
+
+            categoryComboBox.ItemsSource = categories;
+            categoryComboBox.SelectedIndex = 0;
+            categoryFilter = categories[0].Id;
+
             HandlePagingInfoForCakes();
             DisplayProducts();
         }
 
         void DisplayProducts()
         {
-            var fetchedCakes = CakesDAO.GetCake();
+            var fetchedCakes = CakesDAO.GetCake(cakesPaging.RowsPerPage, cakesPaging.CurrentPage, categoryFilter);
             cakesListView.ItemsSource = fetchedCakes;
         }
 
@@ -257,6 +261,14 @@ namespace CakeShop.screens
             ordersScreen.Show();
 
             this.Close();
+        }
+
+        private void categoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var that = sender as ComboBox;
+            categoryFilter = (that.SelectedIndex).ToString();
+            HandlePagingInfoForCakes();
+            DisplayProducts();
         }
     }
 }

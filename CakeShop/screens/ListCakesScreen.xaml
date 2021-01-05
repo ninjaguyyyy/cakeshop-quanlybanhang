@@ -235,7 +235,7 @@
                                    />
                     <TextBlock 
                                    FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
-                                   Text="Chuyến đi"
+                                   Text="Bánh ngọt"
                         VerticalAlignment="Center"
                                 Foreground="#948E84"
                                    FontSize="18"
@@ -254,21 +254,27 @@
                         </Button.Background>
                     </Button>
                 </StackPanel>
-                
-                <ComboBox Name="modeSearchComboBox"
+
+                <ComboBox Name="categoryComboBox"
                               Width="150"
+                          Tag="{Binding Id}"
                           HorizontalAlignment="Right"
                                         Style="{StaticResource ComboBoxTest2}"
                                         Grid.Column="2"
                                         VerticalAlignment="Center"
                                         FontSize="14"
-                              
-                                        SelectionChanged="modeSearchComboBox_SelectionChanged"
+                                        SelectionChanged="categoryComboBox_SelectionChanged"
                                         Margin="0,0,10,0"
                                         >
-                    <ComboBoxItem IsSelected="true" Tag="name_trip" >Theo tên chuyến</ComboBoxItem>
-                    <ComboBoxItem Tag="name_member">Theo thành viên</ComboBoxItem>
+                    
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
 
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
 
@@ -293,12 +299,12 @@
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="5, 8, 10, 5"
+                                <StackPanel Margin="20, 8, 10, 20"
                                                 Tag="{Binding Id}"
                                                 Name="cakeListViewItem"
                                             PreviewMouseLeftButtonUp="cakeListViewItem_PreviewMouseLeftButtonUp"
                                                 >
-                                    <Border Width="150" 
+                                    <Border Width="160" 
                                                 Height="90" 
                                                 CornerRadius="8">
                                         <Border.Background>
