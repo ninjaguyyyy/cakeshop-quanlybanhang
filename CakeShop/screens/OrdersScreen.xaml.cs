@@ -40,6 +40,7 @@ namespace CakeShop.screens
             {
                 var newOrder = addOrderScreen.NewOrder;
                 OrdersDAO.InsertOrder(newOrder);
+                DisplayOrders();
             }
         }
 
@@ -94,7 +95,18 @@ namespace CakeShop.screens
             fetchedOrders = OrdersDAO.GetOrders();
             ordersListView.ItemsSource = fetchedOrders;
 
-            orderToShow = fetchedOrders[0];
+            if(fetchedOrders.Count != 0)
+            {
+                orderToShow = fetchedOrders[0];
+            }
+            else
+            {
+                orderToShow = new Order()
+                {
+                    Name = "mac dinh",
+                };
+            }
+            
             DisplayOrderToShow();
         }
 

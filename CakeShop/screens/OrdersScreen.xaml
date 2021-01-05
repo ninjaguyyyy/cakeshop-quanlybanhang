@@ -505,6 +505,7 @@
 
                             <Grid Grid.Row="2">
                                 <ListView x:Name="cakesChosenListView"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                           Background="#425C5A">
                                     <ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -514,9 +515,10 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel x:Name="cartItemListViewItem"
-                                                            Uid="{Binding Id}">
-                                                <Border Width="80" 
-                                                Height="40" 
+                                                            Uid="{Binding Id}"
+                                                        Margin="5, 5, 5, 5">
+                                                <Border Width="90" 
+                                                Height="50" 
                                                 CornerRadius="8">
                                                     <Border.Background>
                                                         <ImageBrush ImageSource="{Binding Cake.Image_Main, Converter={StaticResource converter}}" />
@@ -581,7 +583,7 @@
                                 <TextBlock Text="{Binding TotalPrice, Converter={StaticResource unitConverter}}"
                                                        Foreground="White"
                                                        TextAlignment="Center"
-                                           FontSize="15"            
+                                           FontSize="17"            
                                            VerticalAlignment="Center"
                                                        FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
                                                        Margin="5, 5, 5, 5" />
