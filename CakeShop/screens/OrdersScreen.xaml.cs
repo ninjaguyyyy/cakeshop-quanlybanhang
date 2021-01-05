@@ -1,4 +1,5 @@
 ﻿using CakeShop.DAO;
+using CakeShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace CakeShop.screens
     /// </summary>
     public partial class OrdersScreen : Window
     {
+        private Order orderToShow = new Order();
+        private List<Order> fetchedOrders = new List<Order>();
         public OrdersScreen()
         {
             InitializeComponent();
@@ -88,9 +91,25 @@ namespace CakeShop.screens
 
         void DisplayOrders()
         {
-            var fetchedOrders = OrdersDAO.GetOrders();
+            fetchedOrders = OrdersDAO.GetOrders();
             ordersListView.ItemsSource = fetchedOrders;
-            
+
+            orderToShow = fetchedOrders[0];
+            DisplayOrderToShow();
+        }
+
+        void DisplayOrderToShow()
+        {
+            cakesChosenListView.ItemsSource = orderToShow.CartItems;
+            this.DataContext = orderToShow;
+        }
+
+        private void orderListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var that = sender as Border;
+            string idOrderToShow = that.Uid;
+            orderToShow = fetchedOrders.Find(item => item.Id == idOrderToShow);
+            DisplayOrderToShow();
         }
     }
 }

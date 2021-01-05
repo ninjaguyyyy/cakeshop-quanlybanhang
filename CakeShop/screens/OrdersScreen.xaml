@@ -182,6 +182,8 @@
 
     <local:ImagePathToAbsolutePathConverter x:Key="converter" />
     <local:MoneyUnitConverter x:Key="unitConverter" />
+    <local:SliceStringConverter x:Key="sliceNameConverter" />
+        
     </Window.Resources>
     <Grid>
         <Grid x:Name="mainPanel" 
@@ -287,21 +289,33 @@
                             <DataTemplate>
                                 <Border Background="White"
                                         CornerRadius="10"
+                                        Name="orderListViewItem"
+                                        PreviewMouseLeftButtonUp="orderListViewItem_PreviewMouseLeftButtonUp"
                                         Width="520"
+                                        Uid="{Binding Id}"
+                                        Margin="0, 0, 0, 5"
                                         Height="80">
-                                    <Grid Margin="10, 10, 10, 10">
+                                    <Grid Margin="20, 10, 20, 10"
+                                          VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Name}"
+                                        <TextBlock Text="{Binding Name, Converter={StaticResource sliceNameConverter}}"
                                                    Grid.Column="0"
-                                                   TextWrapping="Wrap"/>
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
                                         <StackPanel Grid.Column="1">
-                                            <TextBlock Text="{Binding CreatedDate}"/>
-                                            <TextBlock Text="So luong: 2"/>
+                                            <TextBlock Text="{Binding CreatedDate}"
+                                                       Foreground="#C99C33"
+                                                       FontSize="11"
+                                                       FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                                       />
+                                            <TextBlock Text="So luong: 2"
+                                                       FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                                       FontSize="13"/>
                                         </StackPanel>
                                         <Grid Grid.Column="2">
                                             <ListView ItemsSource="{Binding CartItems}"
@@ -330,8 +344,17 @@
                                                 </ListView.ItemTemplate>
                                             </ListView>
                                         </Grid>
-                                        <Border Grid.Column="3">
-                                            <TextBlock Text="{Binding TotalPrice}"/>
+                                        <Border Grid.Column="3"
+                                                Background="#C99C33"
+                                                Width="100"
+                                                Height="30"
+                                                CornerRadius="15">
+                                            <TextBlock Text="{Binding TotalPrice, Converter={StaticResource unitConverter}}"
+                                                       Foreground="White"
+                                                       TextAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                                       Margin="5, 5, 5, 5"/>
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -438,8 +461,8 @@
 
                 <Grid Grid.Column="1"
                       Margin="10, 0, 0, 0">
-                    <Border Background="#425C5A"
-                            BorderBrush="#425C5A"
+                    <Border Background="#3D5654"
+                            BorderBrush="#3D5654"
                             BorderThickness="1"
                             CornerRadius="20">
                         <Grid Margin="20">
@@ -447,8 +470,9 @@
                                 <RowDefinition Height="20"/>
                                 <RowDefinition Height="50"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="120"/>
                             </Grid.RowDefinitions>
+                            
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -459,7 +483,7 @@
                                                FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
                                                Foreground="White"
                                                FontSize="13"/>
-                                    <TextBlock Text="Tên a sàdà"
+                                    <TextBlock Text="{Binding Name, Converter={StaticResource sliceNameConverter}}"
                                                FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
                                                Foreground="White"
                                                FontSize="15"/>
@@ -471,13 +495,97 @@
                                                Foreground="White"
                                                FontSize="13"
                                                TextAlignment="Right"/>
-                                    <TextBlock Text="20/02/2020"
+                                    <TextBlock Text="{Binding CreatedDate}"
                                                Foreground="White"
                                                FontSize="15"
                                                FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
                                                TextAlignment="Right"/>
                                 </StackPanel>
                             </Grid>
+
+                            <Grid Grid.Row="2">
+                                <ListView x:Name="cakesChosenListView"
+                                          Background="#425C5A">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Margin="5"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel x:Name="cartItemListViewItem"
+                                                            Uid="{Binding Id}">
+                                                <Border Width="80" 
+                                                Height="40" 
+                                                CornerRadius="8">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding Cake.Image_Main, Converter={StaticResource converter}}" />
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBox Name="quantityTextBox"
+                                                         Width="30"
+                                                         Background="#C99C33"
+                                                             Text="{Binding Quantity}"
+                                                             FontSize="10"
+                                                             Height="18"
+                                                             TextAlignment="Center"
+                                                             Margin="0, 5, 0, 0"/>
+                                            </StackPanel>
+
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                        <Border x:Name="Bd"
+                                                        CornerRadius="8"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        Background="{TemplateBinding Background}"
+                                                        Padding="{TemplateBinding Padding}"
+                                                        SnapsToDevicePixels="True">
+
+                                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <MultiTrigger>
+                                                                <MultiTrigger.Conditions>
+                                                                    <Condition Property="IsMouseOver" Value="True"/>
+
+                                                                </MultiTrigger.Conditions>
+                                                                <Setter Property="Background"
+                                                                TargetName="Bd"
+                                                                Value="#A7E5FC"/>
+                                                                <Setter Property="Cursor" Value="Hand"/>
+
+                                                            </MultiTrigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>
+                            </Grid>
+                            
+                            <Border Grid.Row="3"
+                                    Width="160"
+                                    Margin="0, 10, 0, 0"
+                                    Background="#C99C33"
+                                    CornerRadius="15"
+                                    Height="60">
+                                <TextBlock Text="{Binding TotalPrice, Converter={StaticResource unitConverter}}"
+                                                       Foreground="White"
+                                                       TextAlignment="Center"
+                                           FontSize="15"            
+                                           VerticalAlignment="Center"
+                                                       FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                                       Margin="5, 5, 5, 5" />
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>

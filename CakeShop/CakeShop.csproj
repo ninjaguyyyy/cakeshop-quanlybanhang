@@ -89,6 +89,7 @@
     <Compile Include="screens\ReportsScreen.xaml.cs">
       <DependentUpon>ReportsScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="screens\SliceStringConverter.cs" />
     <Page Include="screens\AddCakeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
