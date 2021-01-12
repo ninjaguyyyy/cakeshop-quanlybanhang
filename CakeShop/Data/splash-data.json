@@ -1,0 +1,17 @@
+﻿[
+  {
+    "id": "s1",
+    "name": "Bánh quy bơ dừa",
+    "description": "Bánh quy bơ dừa được làm từ nguyên liệu cao cấp. Bánh giòn xốp, hương thơm béo của dừa hoà quyện với vị ngậy từ bơ. Bánh quy phù hợp với buổi tiệc trà và cà phê."
+  },
+  {
+    "id": "s2",
+    "name": "Bánh Donut dâu",
+    "description": "Bánh donut sẽ được những người thợ tỉ mỉ tạo hình bánh tròn nhỏ, nướng giòn, sau đó phủ thêm một lớp socola cho những ai yêu thích hương vị ngọt."
+  },
+  {
+    "id": "s3",
+    "name": "Bánh Tart trứng",
+    "description": "Bánh Fresh Garden nhân tart trứng mềm thơm, ngon miệng là sản phẩm được ưa chuộng bởi mọi lứa tuổi."
+  }
+]
