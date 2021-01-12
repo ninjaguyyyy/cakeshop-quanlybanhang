@@ -233,7 +233,8 @@
                                 Padding="10, 8, 10, 8"
                                 SelectedDate="{Binding CreatedDate}"
                                 VerticalAlignment="Center"
-                                Name="endPlacePicker"
+                                SelectedDateChanged="createdDatePicker_SelectedDateChanged"
+                                Name="createdDatePicker"
                                 Grid.Column="2">
                     </DatePicker>
                 </Grid>

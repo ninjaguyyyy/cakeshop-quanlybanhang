@@ -81,6 +81,16 @@ namespace CakeShop.DAO
                             Price = int.Parse(cakeObj["Price"].ToString()),
                             Image_Main = cakeObj["Image_Main"].ToString(),
                         };
+
+
+                        var categoryObj = JObject.Parse(cakeObj["Category"].ToString());
+                        Category category = new Category()
+                        {
+                            Id = categoryObj["Id"].ToString(),
+                            Name = categoryObj["Name"].ToString()
+                        };
+                        cake.Category = category;
+
                         newCartItem.Cake = cake;
 
                         orderObject.CartItems.Add(newCartItem);

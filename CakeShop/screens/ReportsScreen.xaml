@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CakeShop.screens"
+        xmlns:local="clr-namespace:CakeShop.screens" xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="ReportsScreen" Height="620" Width="988"
         WindowStartupLocation="CenterScreen"
@@ -236,25 +236,52 @@
                         Background="#3D5654"
                         CornerRadius="10"
                         Margin="10, 0, 10, 0">
-                    <Grid>
-                        
-                    </Grid>
+                    <StackPanel Margin="15, 35, 0, 20">
+                        <TextBlock Text="Tổng tiền"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                   />
+                        <TextBlock Text="1254345"
+                                   FontSize="16"
+                                   Margin="0, 10, 0, 0"
+                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                   Foreground="White"/>
+                    </StackPanel>
                 </Border>
                 <Border Grid.Column="1"
                         Background="#3D5654"
                         CornerRadius="10"
                         Margin="10, 0, 10, 0">
-                    <Grid>
-                        
-                    </Grid>
+                    <StackPanel Margin="15, 35, 0, 20">
+                        <TextBlock Text="Tổng tiền"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                   />
+                        <TextBlock Text="1254345"
+                                   FontSize="16"
+                                   Margin="0, 10, 0, 0"
+                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                   Foreground="White"/>
+                    </StackPanel>
                 </Border>
                 <Border Grid.Column="2"
                         Background="#3D5654"
                         CornerRadius="10"
                         Margin="10, 0, 10, 0">
-                    <Grid>
-
-                    </Grid>
+                    <StackPanel Margin="15, 35, 0, 20">
+                        <TextBlock Text="Tổng tiền"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
+                                   />
+                        <TextBlock Text="1254345"
+                                   FontSize="16"
+                                   Margin="0, 10, 0, 0"
+                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                   Foreground="White"/>
+                    </StackPanel>
                 </Border>
 
             </Grid>
@@ -271,13 +298,25 @@
                     
                     <Border Background="White"
                             CornerRadius="20">
-                        <Grid>
+                        <Grid Margin="15, 10, 15, 20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="Theo a"/>
+                            <TextBlock Text="Theo a"
+                                       FontSize="16"
+                                   Margin="0, 10, 0, 0"
+                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                   />
+
+                            <Wpf:PieChart Name="revenueByCategoryPie"
+                                          Margin="0, 10, 0, 0"
+                                                  Grid.Row="1"
+                                                  LegendLocation="Bottom"
+                                                  >
+
+                            </Wpf:PieChart>
                         </Grid>
                         
                     </Border>
@@ -294,20 +333,29 @@
                             BorderBrush="White"
                             BorderThickness="1"
                             CornerRadius="20">
-                        <Grid Margin="20">
+                        <Grid Margin="15, 10, 15, 20">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="50"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                            </Grid>
+
+                            <TextBlock Text="Theo a"
+                                       FontSize="16"
+                                   Margin="0, 10, 0, 0"
+                                   FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
+                                   />
+
+                            <Wpf:CartesianChart Grid.Row="1"
+                                                Name="revueneByMonthChart"
+                                                Margin="0, 10, 0, 0"
+                                 LegendLocation="Left">
+                                <Wpf:CartesianChart.AxisX>
+                                    <Wpf:Axis Title="Tháng" Labels="{Binding Labels}"></Wpf:Axis>
+                                </Wpf:CartesianChart.AxisX>
+                                <Wpf:CartesianChart.AxisY>
+                                    <Wpf:Axis Title="Doanh thu" LabelFormatter="{Binding Formatter}"></Wpf:Axis>
+                                </Wpf:CartesianChart.AxisY>
+                            </Wpf:CartesianChart>
                         </Grid>
                     </Border>
                 </Grid>
@@ -439,40 +487,12 @@
 
                         </ListViewItem>
 
-                        <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15" 
-                                      MouseEnter="ListViewItem_MouseEnter"
-                                          >
-                            <StackPanel Orientation="Horizontal"
-                                            Width="230">
-
-                                <Image Source="../Assets/Images/add-goods.png"
-                                       Width="30"
-                                       Margin="12,0,0,0"/>
-
-                                <TextBlock Text="Thêm bánh"
-                                            Margin="25,0,0,0"
-                                            Style="{StaticResource font_style}"/>
-
-                            </StackPanel>
-
-                            <!--// Tooltip //-->
-
-                            <ListViewItem.ToolTip>
-
-                                <ToolTip x:Name="tt_add"
-                                        Content="Thêm bánh"
-                                        Style="{StaticResource tt_style}"/>
-
-                            </ListViewItem.ToolTip>
-
-                        </ListViewItem>
-
-                        <!--// Add trip //-->
+                        
 
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15" 
-                                      Name="addTripListViewItem"
+                                      Name="orderMenu"
+                                      PreviewMouseLeftButtonUp="orderMenu_PreviewMouseLeftButtonUp"
                                       MouseEnter="ListViewItem_MouseEnter"
                                       >
 

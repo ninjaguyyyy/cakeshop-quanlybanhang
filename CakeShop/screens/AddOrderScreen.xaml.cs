@@ -32,6 +32,7 @@ namespace CakeShop.screens
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DisplayProducts();
+            NewOrder.CreatedDate = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
@@ -50,7 +51,7 @@ namespace CakeShop.screens
                 MessageBox.Show("Chưa điền đầy đủ thông tin", "Lỗi");
                 return;
             }
-            NewOrder.Name = name;
+            NewOrder.Name = name; 
             
 
             DialogResult = true;
@@ -81,7 +82,7 @@ namespace CakeShop.screens
             var nameGenerated = Guid.NewGuid().ToString();
             NewOrder.Id = nameGenerated;
             NewOrder.Name = nameGenerated;
-            NewOrder.CreatedDate = DateTime.Now.ToString("dd/MM/yyyy");
+            
             NewOrder.CartItems = chosenCakes;
             NewOrder.TotalPrice = chosenCakes.Sum(item => item.TotalPrice);
             priceTextbox.Text = NewOrder.TotalPrice.ToString() + " vnđ";
@@ -111,6 +112,17 @@ namespace CakeShop.screens
             }
 
             DisplayProducts();
+        }
+
+        private void endPlacePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void createdDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime date = (DateTime)createdDatePicker.SelectedDate;
+            NewOrder.CreatedDate = date.ToString("dd/MM/yyyy");
         }
     }
 }

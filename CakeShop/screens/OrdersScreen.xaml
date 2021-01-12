@@ -307,16 +307,16 @@
                                                    Grid.Column="0"
                                                    VerticalAlignment="Center"
                                                    FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"/>
-                                        <StackPanel Grid.Column="1">
+                                        
                                             <TextBlock Text="{Binding CreatedDate}"
                                                        Foreground="#C99C33"
+                                                       Grid.Column="1"
+                                                       VerticalAlignment="Center"
                                                        FontSize="11"
                                                        FontFamily="../Assets/Fonts/Roboto-Bold.ttf #Roboto"
                                                        />
-                                            <TextBlock Text="So luong: 2"
-                                                       FontFamily="../Assets/Fonts/Roboto.ttf #Roboto"
-                                                       FontSize="13"/>
-                                        </StackPanel>
+                                            
+                                        
                                         <Grid Grid.Column="2">
                                             <ListView ItemsSource="{Binding CartItems}"
                                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -719,36 +719,7 @@
 
                         </ListViewItem>
 
-                        <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15" 
-                                      MouseEnter="ListViewItem_MouseEnter"
-                                          >
-                            <StackPanel Orientation="Horizontal"
-                                            Width="230">
-
-                                <Image Source="../Assets/Images/add-goods.png"
-                                       Width="30"
-                                       Margin="12,0,0,0"/>
-
-                                <TextBlock Text="Thêm bánh"
-                                            Margin="25,0,0,0"
-                                            Style="{StaticResource font_style}"/>
-
-                            </StackPanel>
-
-                            <!--// Tooltip //-->
-
-                            <ListViewItem.ToolTip>
-
-                                <ToolTip x:Name="tt_add"
-                                        Content="Thêm bánh"
-                                        Style="{StaticResource tt_style}"/>
-
-                            </ListViewItem.ToolTip>
-
-                        </ListViewItem>
-
-                        <!--// Add trip //-->
+                        
 
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15" 
@@ -785,7 +756,8 @@
 
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15"
-                                      Name="settingScreen"
+                                      Name="reportMenu"
+                                      PreviewMouseLeftButtonUp="reportMenu_PreviewMouseLeftButtonUp"
                                       MouseEnter="ListViewItem_MouseEnter"
                                           >
 

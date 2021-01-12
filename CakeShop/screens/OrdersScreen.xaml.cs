@@ -69,14 +69,12 @@ namespace CakeShop.screens
             if (menuToggleButton.IsChecked == true)
             {
                 tt_cakes.Visibility = Visibility.Collapsed;
-                tt_add.Visibility = Visibility.Collapsed;
                 tt_orders.Visibility = Visibility.Collapsed;
                 tt_report.Visibility = Visibility.Collapsed;
             }
             else
             {
                 tt_cakes.Visibility = Visibility.Visible;
-                tt_add.Visibility = Visibility.Visible;
                 tt_orders.Visibility = Visibility.Visible;
                 tt_report.Visibility = Visibility.Visible;
             }
@@ -122,6 +120,14 @@ namespace CakeShop.screens
             string idOrderToShow = that.Uid;
             orderToShow = fetchedOrders.Find(item => item.Id == idOrderToShow);
             DisplayOrderToShow();
+        }
+
+        private void reportMenu_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var reportScreen = new ReportsScreen();
+            reportScreen.Show();
+
+            this.Close();
         }
     }
 }
