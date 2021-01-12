@@ -42,6 +42,6 @@ Cake Shop - Phần mềm Window phục vụ quản lý bán hàng cho tiệm
 ## 💌 Điểm đề nghị
 Số điểm đề nghị: **10** điểm
 ## 📌 Link Youtube demo
-Link: 
+Link: https://youtu.be/FHIJMWrWsuQ
 ## 🔒 Quyền sử dụng Project
 Có thể share cho các khóa sau
