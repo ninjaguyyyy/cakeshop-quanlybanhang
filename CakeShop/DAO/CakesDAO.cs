@@ -38,7 +38,7 @@ namespace CakeShop.DAO
             return result;
         }
 
-        public static int CountCakes()
+        public static int CountCakes(string categoryFilter)
         {
             var result = 0;
 
@@ -48,7 +48,30 @@ namespace CakeShop.DAO
             try
             {
                 JArray cakes = JArray.Parse(json);
-                result = cakes.Count();
+                foreach (var cake in cakes)
+                {
+                    Cake cakeObject = new Cake();
+                    
+
+                    var categoryObj = JObject.Parse(cake["Category"].ToString());
+                    var categoryId = categoryObj["Id"].ToString();
+                    
+
+
+                    if (categoryFilter == "0")
+                    {
+                        return cakes.Count();
+                    }
+                    else
+                    {
+                        if (categoryFilter == categoryId)
+                        {
+                            result++;
+                        }
+                    }
+
+                }
+                
             }
             catch (Exception)
             {

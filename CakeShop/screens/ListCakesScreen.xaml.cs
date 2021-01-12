@@ -20,7 +20,7 @@ namespace CakeShop.screens
     /// </summary>
     public partial class ListCakesScreen : Window
     {
-        private string categoryFilter;
+        private string categoryFilter = "0";
         class PageInfo
         {
             public int Page { get; set; }
@@ -132,7 +132,7 @@ namespace CakeShop.screens
 
         void HandlePagingInfoForCakes()
         {
-            var count = CakesDAO.CountCakes();
+            var count = CakesDAO.CountCakes(categoryFilter);
 
             cakesPaging = new Paging
             {
